@@ -11,6 +11,7 @@ var minigameNum = 0
 var currentGame: Node
 var on: bool = false
 var tween
+var goLeft: bool = true
 
 func _ready() -> void:
 	loadMinigame()
@@ -25,7 +26,7 @@ func loadMinigame():
 				tween.kill()
 			tween = create_tween()
 			window.position = positions[pos]
-			tween.tween_property(window, "position", Vector2(0, 0), 0.75)
+			tween.tween_property(window, "position", Vector2(0, 0), 0.6)
 			animations.play("spinin")
 			on = !on
 	
@@ -40,14 +41,25 @@ func minigameEnd(success):
 			tween.kill()
 		tween = create_tween()
 		window.position = Vector2(0, 0)
-		tween.tween_property(window, "position", positions[pos], 0.75)
-		animations.play_backwards("spinin")
+		tween.set_ease(Tween.EASE_IN)
+		if goLeft:
+			tween.tween_property(window, "position", Vector2(-320, 0), 0.6).set_trans(Tween.TRANS_QUART)
+		else:
+			tween.tween_property(window, "position", Vector2(320, 0), 0.6).set_trans(Tween.TRANS_QUART)
+		goLeft = !goLeft
+		#tween.tween_property(window, "position", positions[pos], 0.6)
+		#animations.play_backwards("spinin")
 		on = !on
-		pos += 1
 		currentGame.end()
+		
 		minigameNum += 1
 		if minigameNum >= minigames.size():
 			minigameNum = 0
+			
+		pos += 1
+		if pos >= positions.size():
+			pos = 0
+		
 		await get_tree().create_timer(1.0).timeout
 		loadMinigame()
 

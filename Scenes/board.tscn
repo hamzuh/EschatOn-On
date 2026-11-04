@@ -8,3 +8,23 @@ script = ExtResource("1_2wvcj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2044994435]
 texture = ExtResource("2_uh3b8")
+
+[node name="Markers" type="Node2D" parent="." unique_id=1739176139]
+
+[node name="Point1" type="Marker2D" parent="Markers" unique_id=887409716]
+position = Vector2(-100, -60)
+
+[node name="Point2" type="Marker2D" parent="Markers" unique_id=857702127]
+position = Vector2(-20, -60)
+
+[node name="Point3" type="Marker2D" parent="Markers" unique_id=1658065038]
+position = Vector2(60, -60)
+
+[node name="Point4" type="Marker2D" parent="Markers" unique_id=319689253]
+position = Vector2(-60, -20)
+
+[node name="Point5" type="Marker2D" parent="Markers" unique_id=1890813759]
+position = Vector2(20, -20)
+
+[node name="Point6" type="Marker2D" parent="Markers" unique_id=818662186]
+position = Vector2(100, -20)
