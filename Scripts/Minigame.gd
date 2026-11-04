@@ -5,10 +5,11 @@ class_name Minigame extends Node2D
 signal result(resultBool)
 
 func _ready() -> void:
-	pass
+	process_mode = Node.PROCESS_MODE_DISABLED
 
-func spawn():
-	pass
+func gameStart():
+	process_mode = Node.PROCESS_MODE_INHERIT
 	
 func end():
+	process_mode = Node.PROCESS_MODE_DISABLED
 	result.emit(succeed)

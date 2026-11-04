@@ -20,15 +20,14 @@ func loadMinigame():
 	currentGame = minigames[minigameNum].instantiate()
 	currentGame.connect("result", minigameEnd)
 	viewport.add_child(currentGame)
-	if not animations.is_playing():
-		if not on:
-			if tween:
-				tween.kill()
-			tween = create_tween()
-			window.position = positions[pos]
-			tween.tween_property(window, "position", Vector2(0, 0), 0.6)
-			animations.play("spinin")
-			on = !on
+	if not animations.is_playing() and not on:
+		if tween:
+			tween.kill()
+		tween = create_tween()
+		window.position = positions[pos]
+		tween.tween_property(window, "position", Vector2(0, 0), 0.6)
+		animations.play("spinin")
+		on = !on
 	
 func minigameEnd(success):
 	if on and not animations.is_playing():
@@ -88,3 +87,7 @@ func minigameEnd(success):
 func _input(event: InputEvent) -> void:
 	if on:
 		viewport.push_input(event)
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "spinin":
+		currentGame.gameStart()
